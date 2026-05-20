@@ -1,3 +1,15 @@
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
+locals {
+  cloudtrail_source_arn = format(
+    "arn:aws:cloudtrail:%s:%s:trail/%s",
+    data.aws_region.current.name,
+    data.aws_caller_identity.current.account_id,
+    aws_cloudtrail.main.name
+  )
+}
+
 # S3 bucket to store CloudTrail logs
 resource "aws_s3_bucket" "trail_bucket" {
   bucket        = "${var.product}-cloudtrail-logs"
@@ -5,6 +17,12 @@ resource "aws_s3_bucket" "trail_bucket" {
 
   lifecycle {
     prevent_destroy = true
+  }
+
+  ownership_controls {
+    rule {
+      object_ownership = "BucketOwnerPreferred"
+    }
   }
 
   tags = merge(var.tags, local.tags)
@@ -26,8 +44,7 @@ resource "aws_s3_bucket_policy" "trail_bucket_policy" {
         Resource = aws_s3_bucket.trail_bucket.arn
         Condition = {
           StringEquals = {
-            "aws:SourceAccount" = data.aws_caller_identity.current.account_id
-            "aws:SourceArn"     = aws_cloudtrail.main.arn
+            "aws:SourceArn" = local.cloudtrail_source_arn
           }
         }
       },
@@ -41,9 +58,8 @@ resource "aws_s3_bucket_policy" "trail_bucket_policy" {
         Resource = "${aws_s3_bucket.trail_bucket.arn}/AWSLogs/${data.aws_caller_identity.current.account_id}/*"
         Condition = {
           StringEquals = {
-            "s3:x-amz-acl"      = "bucket-owner-full-control"
-            "aws:SourceAccount" = data.aws_caller_identity.current.account_id
-            "aws:SourceArn"     = aws_cloudtrail.main.arn
+            "s3:x-amz-acl"  = "bucket-owner-full-control"
+            "aws:SourceArn" = local.cloudtrail_source_arn
           }
         }
       }
