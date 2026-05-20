@@ -3,6 +3,10 @@ resource "aws_s3_bucket" "trail_bucket" {
   bucket        = "${var.product}-cloudtrail-logs"
   force_destroy = false
 
+  lifecycle {
+    prevent_destroy = true
+  }
+
   tags = merge(var.tags, local.tags)
 }
 
