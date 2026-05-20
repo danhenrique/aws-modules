@@ -1,10 +1,11 @@
 locals {
-  cloudtrail_source_arn = format(
-    "arn:aws:cloudtrail:%s:%s:trail/%s",
-    data.aws_region.current.name,
-    data.aws_caller_identity.current.account_id,
-    aws_cloudtrail.main.name
-  )
+  trail_name = "${var.product}-trail"
+
+  template_vars = {
+    bucket_arn = aws_s3_bucket.trail_bucket.arn
+    account_id = data.aws_caller_identity.current.account_id
+    trail_name = local.trail_name
+  }
 
   tags = {
     ManagedBy  = "terraform"
