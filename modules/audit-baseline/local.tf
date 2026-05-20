@@ -1,6 +1,6 @@
 locals {
   tags = {
-    ManagedBy = "terraform"
+    ManagedBy  = "terraform"
     Repository = var.repository
   }
 }
