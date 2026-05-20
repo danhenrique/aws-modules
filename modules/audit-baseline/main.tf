@@ -10,6 +10,31 @@ resource "aws_s3_bucket" "trail_bucket" {
   tags = merge(var.tags, local.tags)
 }
 
+resource "aws_s3_bucket_policy" "trail_bucket_policy" {
+  bucket = aws_s3_bucket.trail_bucket.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid    = "AllowCloudTrailToPutObjects"
+        Effect = "Allow"
+        Principal = {
+          Service = "cloudtrail.amazonaws.com"
+        }
+        Action = [
+          "s3:GetBucketAcl",
+          "s3:PutObject"
+        ]
+        Resource = [
+          aws_s3_bucket.trail_bucket.arn,
+          "${aws_s3_bucket.trail_bucket.arn}/AWSLogs/${data.aws_caller_identity.current.account_id}/*"
+        ]
+      }
+    ]
+  })
+}
+
 # Configure the audit trail to monitor account activity
 resource "aws_cloudtrail" "main" {
   name                          = "${var.product}-trail"
