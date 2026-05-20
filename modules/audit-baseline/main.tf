@@ -26,7 +26,8 @@ resource "aws_s3_bucket_policy" "trail_bucket_policy" {
         Resource = aws_s3_bucket.trail_bucket.arn
         Condition = {
           StringEquals = {
-            "aws:SourceArn" = aws_cloudtrail.main.arn
+            "aws:SourceAccount" = data.aws_caller_identity.current.account_id
+            "aws:SourceArn"     = aws_cloudtrail.main.arn
           }
         }
       },
@@ -40,8 +41,9 @@ resource "aws_s3_bucket_policy" "trail_bucket_policy" {
         Resource = "${aws_s3_bucket.trail_bucket.arn}/AWSLogs/${data.aws_caller_identity.current.account_id}/*"
         Condition = {
           StringEquals = {
-            "s3:x-amz-acl"  = "bucket-owner-full-control"
-            "aws:SourceArn" = aws_cloudtrail.main.arn
+            "s3:x-amz-acl"      = "bucket-owner-full-control"
+            "aws:SourceAccount" = data.aws_caller_identity.current.account_id
+            "aws:SourceArn"     = aws_cloudtrail.main.arn
           }
         }
       }
