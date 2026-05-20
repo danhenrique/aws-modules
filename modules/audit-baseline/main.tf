@@ -1,15 +1,3 @@
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
-locals {
-  cloudtrail_source_arn = format(
-    "arn:aws:cloudtrail:%s:%s:trail/%s",
-    data.aws_region.current.name,
-    data.aws_caller_identity.current.account_id,
-    aws_cloudtrail.main.name
-  )
-}
-
 # S3 bucket to store CloudTrail logs
 resource "aws_s3_bucket" "trail_bucket" {
   bucket        = "${var.product}-cloudtrail-logs"
