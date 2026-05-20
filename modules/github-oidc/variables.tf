@@ -13,7 +13,12 @@ variable "product" {
   type        = string
 }
 
+variable "repository" {
+  type        = string
+  description = "The github repository URL for the project. This is used for documentation and tracking purposes."
+}
+
 variable "tags" {
   type        = map(string)
-  description = "Tags to apply to all resources"
+  description = "Custom tags to apply to resources. These will be merged with default tags defined in the module."
 }

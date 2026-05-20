@@ -5,7 +5,7 @@ resource "aws_iam_openid_connect_provider" "github" {
   url            = "https://token.actions.githubusercontent.com"
   client_id_list = ["sts.amazonaws.com"]
 
-  tags = var.tags
+  tags = merge(var.tags, local.tags)
 }
 
 # --- 1. PERMISSION BOUNDARIES (The Guardrails) ---
@@ -19,7 +19,7 @@ resource "aws_iam_policy" "shared_boundary" {
     product    = var.product
   })
 
-  tags = var.tags
+  tags = merge(var.tags, local.tags)
 }
 
 # --- 2. IAM ROLES (Segregated by Repository Prefix) ---
@@ -34,7 +34,7 @@ resource "aws_iam_role" "infra_role" {
     environment     = var.environment
   })
 
-  tags = var.tags
+  tags = merge(var.tags, local.tags)
 }
 
 resource "aws_iam_role_policy" "infra_deploy_policy" {
@@ -57,7 +57,7 @@ resource "aws_iam_role" "app_role" {
     environment     = var.environment
   })
 
-  tags = var.tags
+  tags = merge(var.tags, local.tags)
 }
 
 resource "aws_iam_role_policy" "app_deploy_policy" {
