@@ -9,7 +9,10 @@
       },
       "Condition": {
         "StringLike": {
-          "token.actions.githubusercontent.com:sub": "repo:${github_org}/aws-*-app-*:environment:${environment}"
+          "token.actions.githubusercontent.com:sub": [
+            "repo:${github_org}/aws-*-app:environment:${environment}",
+            "repo:${github_org}/aws-*-app-*:environment:${environment}"
+          ]
         },
         "StringEquals": {
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
