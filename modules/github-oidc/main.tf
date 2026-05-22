@@ -14,7 +14,7 @@ resource "aws_iam_policy" "shared_boundary" {
   name        = "${var.product}-SharedPolicyBoundary"
   description = "Maximum permissions for all roles created by infra and app deployers"
 
-  policy = templatefile("${path.module}/boundary_templates/policies/shared_boundary_policy.tftpl", local.template_variables)
+  policy = templatefile("${path.module}/boundary_templates/policies/shared_boundary_policy.tftpl", local.base_template_variables)
 
   tags = merge(var.tags, local.tags)
 }
