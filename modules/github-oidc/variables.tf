@@ -3,9 +3,9 @@ variable "github_org" {
   description = "GitHub Organization or Username"
 }
 
-variable "account_name" {
+variable "product" {
+  description = "The name of the product or project. This will be used to name resources consistently."
   type        = string
-  description = "The name of the AWS account. This is used for documentation and tracking purposes."
 }
 
 variable "environment" {
