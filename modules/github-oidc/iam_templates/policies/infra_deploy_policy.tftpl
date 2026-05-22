@@ -57,7 +57,7 @@
       "Resource": "*"
     },
     {
-      "Sid": "AllowS3BucketManagement",
+      "Sid": "AllowS3",
       "Effect": "Allow",
       "Action": [
         "s3:CreateBucket",
@@ -103,7 +103,7 @@
       "Resource": "*"
     },
     {
-      "Sid": "AllowDynamoDB",
+      "Sid": "AllowInfraServices",
       "Effect": "Allow",
       "Action": [
         "dynamodb:CreateTable",
@@ -121,14 +121,7 @@
         "dynamodb:TagResource",
         "dynamodb:UntagResource",
         "dynamodb:ListTagsOfResource",
-        "dynamodb:DescribeLimits"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "AllowSSM",
-      "Effect": "Allow",
-      "Action": [
+        "dynamodb:DescribeLimits",
         "ssm:GetParameter",
         "ssm:GetParameters",
         "ssm:GetParametersByPath",
@@ -140,14 +133,7 @@
         "ssm:LabelParameterVersion",
         "ssm:AddTagsToResource",
         "ssm:RemoveTagsFromResource",
-        "ssm:ListTagsForResource"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "AllowSecretsManager",
-      "Effect": "Allow",
-      "Action": [
+        "ssm:ListTagsForResource",
         "secretsmanager:CreateSecret",
         "secretsmanager:DeleteSecret",
         "secretsmanager:UpdateSecret",
@@ -163,7 +149,26 @@
         "secretsmanager:DeleteResourcePolicy",
         "secretsmanager:ValidateResourcePolicy",
         "secretsmanager:TagResource",
-        "secretsmanager:UntagResource"
+        "secretsmanager:UntagResource",
+        "logs:CreateLogGroup",
+        "logs:DeleteLogGroup",
+        "logs:DescribeLogGroups",
+        "logs:ListTagsForResource",
+        "logs:TagResource",
+        "logs:UntagResource",
+        "logs:PutRetentionPolicy",
+        "logs:DeleteRetentionPolicy",
+        "logs:CreateLogStream",
+        "logs:DescribeLogStreams",
+        "logs:PutLogEvents",
+        "logs:PutSubscriptionFilter",
+        "logs:DeleteSubscriptionFilter",
+        "logs:DescribeSubscriptionFilters",
+        "logs:AssociateKmsKey",
+        "logs:DisassociateKmsKey",
+        "logs:PutResourcePolicy",
+        "logs:DeleteResourcePolicy",
+        "logs:DescribeResourcePolicies"
       ],
       "Resource": "*"
     },
@@ -194,32 +199,6 @@
       }
     },
     {
-      "Sid": "AllowCloudWatchLogs",
-      "Effect": "Allow",
-      "Action": [
-        "logs:CreateLogGroup",
-        "logs:DeleteLogGroup",
-        "logs:DescribeLogGroups",
-        "logs:ListTagsForResource",
-        "logs:TagResource",
-        "logs:UntagResource",
-        "logs:PutRetentionPolicy",
-        "logs:DeleteRetentionPolicy",
-        "logs:CreateLogStream",
-        "logs:DescribeLogStreams",
-        "logs:PutLogEvents",
-        "logs:PutSubscriptionFilter",
-        "logs:DeleteSubscriptionFilter",
-        "logs:DescribeSubscriptionFilters",
-        "logs:AssociateKmsKey",
-        "logs:DisassociateKmsKey",
-        "logs:PutResourcePolicy",
-        "logs:DeleteResourcePolicy",
-        "logs:DescribeResourcePolicies"
-      ],
-      "Resource": "*"
-    },
-    {
       "Sid": "EnforceBoundaryOnRoleCreation",
       "Effect": "Allow",
       "Action": [
@@ -246,28 +225,16 @@
       "Resource": "arn:aws:iam::${account_id}:role/*"
     },
     {
-      "Sid": "AllowRoleDeletion",
-      "Effect": "Allow",
-      "Action": "iam:DeleteRole",
-      "Resource": "*"
-    },
-    {
-      "Sid": "AllowCustomPolicyManagement",
+      "Sid": "AllowIAMManagement",
       "Effect": "Allow",
       "Action": [
+        "iam:DeleteRole",
         "iam:CreatePolicy",
         "iam:DeletePolicy",
         "iam:CreatePolicyVersion",
         "iam:DeletePolicyVersion",
         "iam:TagPolicy",
-        "iam:UntagPolicy"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "AllowIAMReadOnly",
-      "Effect": "Allow",
-      "Action": [
+        "iam:UntagPolicy",
         "iam:GetRole",
         "iam:GetRolePolicy",
         "iam:ListRoles",
