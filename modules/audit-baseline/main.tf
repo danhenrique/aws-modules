@@ -22,6 +22,7 @@ resource "aws_cloudtrail" "main" {
   s3_bucket_name                = aws_s3_bucket.trail_bucket.id
   include_global_service_events = true
   is_multi_region_trail         = true # Ensures auditing across all regions
+  is_organization_trail         = true # Collects events from all accounts in the organization
 
   tags = merge(var.tags, local.tags)
 }

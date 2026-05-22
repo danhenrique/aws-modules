@@ -11,7 +11,7 @@
       "Resource": "${bucket_arn}",
       "Condition": {
         "StringEquals": {
-          "AWS:SourceArn": "arn:aws:cloudtrail:sa-east-1:${account_id}:trail/${trail_name}"
+          "aws:SourceOrgID": "${org_id}"
         }
       }
     },
@@ -22,11 +22,11 @@
         "Service": "cloudtrail.amazonaws.com"
       },
       "Action": "s3:PutObject",
-      "Resource": "${bucket_arn}/AWSLogs/${account_id}/*",
+      "Resource": "${bucket_arn}/AWSLogs/${org_id}/*",
       "Condition": {
         "StringEquals": {
           "s3:x-amz-acl": "bucket-owner-full-control",
-          "AWS:SourceArn": "arn:aws:cloudtrail:sa-east-1:${account_id}:trail/${trail_name}"
+          "aws:SourceOrgID": "${org_id}"
         }
       }
     }
