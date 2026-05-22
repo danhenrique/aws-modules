@@ -3,6 +3,11 @@ variable "github_org" {
   description = "GitHub Organization or Username"
 }
 
+variable "account_name" {
+  type        = string
+  description = "The name of the AWS account. This is used for documentation and tracking purposes."
+}
+
 variable "environment" {
   type        = string
   description = "Account environment"

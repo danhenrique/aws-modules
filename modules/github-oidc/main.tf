@@ -14,10 +14,7 @@ resource "aws_iam_policy" "shared_boundary" {
   name        = "${var.product}-SharedPolicyBoundary"
   description = "Maximum permissions for all roles created by infra and app deployers"
 
-  policy = templatefile("${path.module}/boundary_templates/policies/shared_boundary_policy.tftpl", {
-    account_id = data.aws_caller_identity.current.account_id
-    product    = var.product
-  })
+  policy = templatefile("${path.module}/boundary_templates/policies/shared_boundary_policy.tftpl", local.template_variables)
 
   tags = merge(var.tags, local.tags)
 }
@@ -28,11 +25,7 @@ resource "aws_iam_policy" "shared_boundary" {
 resource "aws_iam_role" "infra_role" {
   name = "${var.product}-GitHubInfraDeployerRole"
 
-  assume_role_policy = templatefile("${path.module}/iam_templates/roles/infra_deployer_role.tftpl", {
-    github_oidc_arn = aws_iam_openid_connect_provider.github.arn
-    github_org      = var.github_org
-    environment     = var.environment
-  })
+  assume_role_policy = templatefile("${path.module}/iam_templates/roles/infra_deployer_role.tftpl", local.template_variables)
 
   tags = merge(var.tags, local.tags)
 }
@@ -41,21 +34,14 @@ resource "aws_iam_role_policy" "infra_deploy_policy" {
   name = "${var.product}-InfraDeployPolicy"
   role = aws_iam_role.infra_role.id
 
-  policy = templatefile("${path.module}/iam_templates/policies/infra_deploy_policy.tftpl", {
-    boundary_arn = aws_iam_policy.shared_boundary.arn
-    account_id   = data.aws_caller_identity.current.account_id
-  })
+  policy = templatefile("${path.module}/iam_templates/policies/infra_deploy_policy.tftpl", local.template_variables)
 }
 
 # App Deployer Role: Restricted by App Boundary
 resource "aws_iam_role" "app_role" {
   name = "${var.product}-GitHubAppDeployerRole"
 
-  assume_role_policy = templatefile("${path.module}/iam_templates/roles/app_deployer_role.tftpl", {
-    github_oidc_arn = aws_iam_openid_connect_provider.github.arn
-    github_org      = var.github_org
-    environment     = var.environment
-  })
+  assume_role_policy = templatefile("${path.module}/iam_templates/roles/app_deployer_role.tftpl", local.template_variables)
 
   tags = merge(var.tags, local.tags)
 }
@@ -64,8 +50,5 @@ resource "aws_iam_role_policy" "app_deploy_policy" {
   name = "${var.product}-AppDeployPolicy"
   role = aws_iam_role.app_role.id
 
-  policy = templatefile("${path.module}/iam_templates/policies/app_deploy_policy.tftpl", {
-    boundary_arn = aws_iam_policy.shared_boundary.arn
-    account_id   = data.aws_caller_identity.current.account_id
-  })
+  policy = templatefile("${path.module}/iam_templates/policies/app_deploy_policy.tftpl", local.template_variables)
 }
