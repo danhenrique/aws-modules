@@ -3,7 +3,6 @@ locals {
   template_variables = {
     account_id      = data.aws_caller_identity.current.account_id
     product         = var.product
-    account_name    = var.product
     environment     = var.environment
     github_org      = var.github_org
     github_oidc_arn = aws_iam_openid_connect_provider.github.arn
