@@ -10,8 +10,8 @@
       "Condition": {
         "StringLike": {
           "token.actions.githubusercontent.com:sub": [
-            "repo:${github_org}/aws-*-infra:environment:${environment}",
-            "repo:${github_org}/aws-*-infra-*:environment:${environment}"
+            "repo:${github_org}/aws-${account_name}-infra:environment:${environment}",
+            "repo:${github_org}/aws-${account_name}-infra-*:environment:${environment}"
           ]
         },
         "StringEquals": {

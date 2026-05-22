@@ -9,9 +9,7 @@
       },
       "Condition": {
         "StringLike": {
-          "token.actions.githubusercontent.com:sub": [
-            "repo:${github_org}/aws-*-app:environment:${environment}",
-            "repo:${github_org}/aws-*-app-*:environment:${environment}"
+            "repo:${github_org}/aws-${account_name}-app-*:environment:${environment}"
           ]
         },
         "StringEquals": {
