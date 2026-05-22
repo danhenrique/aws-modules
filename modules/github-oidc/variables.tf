@@ -13,11 +13,6 @@ variable "environment" {
   description = "Account environment"
 }
 
-variable "product" {
-  description = "The name of the product or project. This will be used to name resources consistently."
-  type        = string
-}
-
 variable "repository" {
   type        = string
   description = "The github repository URL for the project. This is used for documentation and tracking purposes."
