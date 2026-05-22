@@ -6,6 +6,7 @@ locals {
     account_id = data.aws_caller_identity.current.account_id
     org_id     = data.aws_organizations_organization.current.id
     trail_name = local.trail_name
+    region     = data.aws_region.current.name
   }
 
   tags = {

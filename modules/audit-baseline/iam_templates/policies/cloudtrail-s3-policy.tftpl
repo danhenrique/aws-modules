@@ -11,7 +11,7 @@
       "Resource": "${bucket_arn}",
       "Condition": {
         "StringEquals": {
-          "aws:SourceOrgID": "${org_id}"
+          "aws:SourceArn": "arn:aws:cloudtrail:${region}:${account_id}:trail/${trail_name}"
         }
       }
     },
@@ -26,7 +26,7 @@
       "Condition": {
         "StringEquals": {
           "s3:x-amz-acl": "bucket-owner-full-control",
-          "aws:SourceOrgID": "${org_id}"
+          "aws:SourceArn": "arn:aws:cloudtrail:${region}:${account_id}:trail/${trail_name}"
         }
       }
     }
