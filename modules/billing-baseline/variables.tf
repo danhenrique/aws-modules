@@ -25,6 +25,12 @@ variable "target_emails" {
   type        = list(string)
 }
 
+variable "threshold" {
+  description = "The percentage threshold for budget notifications. Default is 80%."
+  type = number
+  default = 80
+}
+
 variable "repository" {
   type        = string
   description = "The github repository URL for the project. This is used for documentation and tracking purposes."

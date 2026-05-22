@@ -8,7 +8,7 @@ resource "aws_budgets_budget" "monthly_budget" {
 
   notification {
     comparison_operator        = "GREATER_THAN"
-    threshold                  = 45
+    threshold                  = var.threshold
     threshold_type             = "PERCENTAGE"
     notification_type          = "ACTUAL"
     subscriber_email_addresses = var.target_emails
