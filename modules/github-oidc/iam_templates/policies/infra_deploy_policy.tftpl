@@ -249,18 +249,29 @@
       "Resource": "*"
     },
     {
-      "Sid": "Route53DomainAssociation",
+      "Sid": "Route53HostedZoneManagement",
       "Effect": "Allow",
       "Action": [
+        "route53:DeleteHostedZone",
+        "route53:GetHostedZone",
+        "route53:UpdateHostedZoneComment",
         "route53:ChangeResourceRecordSets",
-        "route53:GetHostedZone"
+        "route53:ListResourceRecordSets",
+        "route53:ListTagsForResource",
+        "route53:ChangeTagsForResource"
       ],
       "Resource": "arn:aws:route53:::hostedzone/*"
     },
     {
-      "Sid": "Route53ListHostedZones",
+      "Sid": "Route53GlobalActions",
       "Effect": "Allow",
-      "Action": "route53:ListHostedZones",
+      "Action": [
+        "route53:CreateHostedZone",
+        "route53:ListHostedZones",
+        "route53:ListHostedZonesByName",
+        "route53:GetHostedZoneCount",
+        "route53:GetChange"
+      ],
       "Resource": "*"
     },
     {
