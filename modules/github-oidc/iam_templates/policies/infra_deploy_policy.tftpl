@@ -99,7 +99,12 @@
         "s3:AbortMultipartUpload",
         "s3:ListMultipartUploadParts",
         "s3:ListBucketMultipartUploads",
-        "s3:GetBucketWebsite"
+        "s3:GetBucketWebsite",
+        "s3:GetAccelerateConfiguration",
+        "s3:GetBucketObjectLockConfiguration",
+        "s3:GetBucketRequestPayment",
+        "s3:GetReplicationConfiguration",
+        "s3:GetBucketIntelligentTieringConfiguration"
       ],
       "Resource": "*"
     },
@@ -272,6 +277,51 @@
         "route53:ListHostedZonesByName",
         "route53:GetHostedZoneCount",
         "route53:GetChange"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowCloudTrailManagement",
+      "Effect": "Allow",
+      "Action": [
+        "cloudtrail:CreateTrail",
+        "cloudtrail:UpdateTrail",
+        "cloudtrail:DeleteTrail",
+        "cloudtrail:GetTrail",
+        "cloudtrail:GetTrailStatus",
+        "cloudtrail:StartLogging",
+        "cloudtrail:StopLogging",
+        "cloudtrail:PutEventSelectors",
+        "cloudtrail:GetEventSelectors",
+        "cloudtrail:AddTags",
+        "cloudtrail:RemoveTags"
+      ],
+      "Resource": "arn:aws:cloudtrail:*:${account_id}:trail/*"
+    },
+    {
+      "Sid": "AllowCloudTrailList",
+      "Effect": "Allow",
+      "Action": [
+        "cloudtrail:DescribeTrails",
+        "cloudtrail:ListTrails",
+        "cloudtrail:ListTags",
+        "cloudtrail:GetEventSelectors"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "AllowBudgetsAndOrgRead",
+      "Effect": "Allow",
+      "Action": [
+        "budgets:CreateBudget",
+        "budgets:ModifyBudget",
+        "budgets:DeleteBudget",
+        "budgets:DescribeBudget",
+        "budgets:DescribeBudgets",
+        "budgets:ViewBudget",
+        "sts:GetCallerIdentity",
+        "organizations:DescribeOrganization",
+        "organizations:ListAccounts"
       ],
       "Resource": "*"
     },

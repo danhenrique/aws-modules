@@ -113,6 +113,12 @@
       "Resource": "*"
     },
     {
+      "Sid": "AllowSTS",
+      "Effect": "Allow",
+      "Action": "sts:GetCallerIdentity",
+      "Resource": "*"
+    },
+    {
       "Sid": "Route53DomainAssociation",
       "Effect": "Allow",
       "Action": [

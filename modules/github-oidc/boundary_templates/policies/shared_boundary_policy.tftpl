@@ -20,7 +20,10 @@
         "ssm:*",
         "logs:*",
         "cloudwatch:*",
-        "amplify:*"
+        "amplify:*",
+        "cloudtrail:*",
+        "budgets:*",
+        "sts:GetCallerIdentity"
       ],
       "Resource": "*"
     },
@@ -184,7 +187,18 @@
       "Sid": "DenyOrganizationsAndAccount",
       "Effect": "Deny",
       "Action": [
-        "organizations:*",
+        "organizations:CreateAccount",
+        "organizations:DeleteOrganization",
+        "organizations:MoveAccount",
+        "organizations:RemoveAccountFromOrganization",
+        "organizations:CreateOrganizationalUnit",
+        "organizations:DeleteOrganizationalUnit",
+        "organizations:AttachPolicy",
+        "organizations:DetachPolicy",
+        "organizations:CreatePolicy",
+        "organizations:DeletePolicy",
+        "organizations:EnablePolicyType",
+        "organizations:DisablePolicyType",
         "account:*",
         "aws-portal:*",
         "billing:*",
@@ -199,8 +213,6 @@
       "Action": [
         "cloudtrail:StopLogging",
         "cloudtrail:DeleteTrail",
-        "cloudtrail:UpdateTrail",
-        "cloudtrail:PutEventSelectors",
         "guardduty:DeleteDetector",
         "guardduty:DisassociateFromMasterAccount",
         "guardduty:DisassociateFromAdministratorAccount",
