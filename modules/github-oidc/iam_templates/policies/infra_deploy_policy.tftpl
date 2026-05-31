@@ -179,6 +179,22 @@
       "Resource": "*"
     },
     {
+      "Sid": "AllowEventBusManagement",
+      "Effect": "Allow",
+      "Action": [
+        "events:CreateEventBus",
+        "events:DeleteEventBus",
+        "events:DescribeEventBus",
+        "events:ListEventBuses",
+        "events:PutPermission",
+        "events:RemovePermission",
+        "events:ListTagsForResource",
+        "events:TagResource",
+        "events:UntagResource"
+      ],
+      "Resource": "*"
+    },
+    {
       "Sid": "AllowKMSUsage",
       "Effect": "Allow",
       "Action": [
