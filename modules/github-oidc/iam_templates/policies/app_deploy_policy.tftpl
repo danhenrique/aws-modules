@@ -112,7 +112,9 @@
         "iam:GetPolicyVersion",
         "iam:ListPolicies",
         "iam:ListPolicyVersions",
-        "iam:ListInstanceProfilesForRole"
+        "iam:ListInstanceProfilesForRole",
+        "iam:ListRoleTags",
+        "iam:ListPolicyTags"
       ],
       "Resource": "*"
     },
@@ -194,12 +196,17 @@
       "Action": [
         "acm:RequestCertificate",
         "acm:DescribeCertificate",
+        "acm:GetCertificate",
         "acm:ListCertificates",
         "acm:DeleteCertificate",
+        "acm:UpdateCertificateOptions",
+        "acm:RenewCertificate",
+        "acm:ImportCertificate",
         "acm:AddTagsToCertificate",
+        "acm:RemoveTagsFromCertificate",
         "acm:ListTagsForCertificate"
       ],
-      "Resource": "arn:aws:acm:*:${account_id}:certificate/*"
+      "Resource": "*"
     }
   ]
 }

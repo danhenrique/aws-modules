@@ -368,10 +368,17 @@
       "Action": [
         "acm:RequestCertificate",
         "acm:DescribeCertificate",
+        "acm:GetCertificate",
         "acm:ListCertificates",
-        "acm:DeleteCertificate"
+        "acm:DeleteCertificate",
+        "acm:UpdateCertificateOptions",
+        "acm:RenewCertificate",
+        "acm:ImportCertificate",
+        "acm:AddTagsToCertificate",
+        "acm:RemoveTagsFromCertificate",
+        "acm:ListTagsForCertificate"
       ],
-      "Resource": "arn:aws:acm:*:${account_id}:certificate/*"
+      "Resource": "*"
     }
   ]
 }
