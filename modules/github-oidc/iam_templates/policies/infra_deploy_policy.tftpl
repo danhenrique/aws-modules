@@ -363,6 +363,18 @@
       "Resource": "arn:aws:iam::${account_id}:oidc-provider/*"
     },
     {
+      "Sid": "AllowAPIGateway",
+      "Effect": "Allow",
+      "Action": [
+        "apigateway:GET",
+        "apigateway:POST",
+        "apigateway:PUT",
+        "apigateway:PATCH",
+        "apigateway:DELETE"
+      ],
+      "Resource": "*"
+    },
+    {
       "Sid": "ACMCertificate",
       "Effect": "Allow",
       "Action": [
