@@ -11,7 +11,9 @@
         "StringLike": {
           "token.actions.githubusercontent.com:sub": [
             "repo:${github_org}/aws-${product}-infra:environment:${environment}",
-            "repo:${github_org}/aws-${product}-infra-*:environment:${environment}"
+            "repo:${github_org}/aws-${product}-infra-*:environment:${environment}",
+            "repo:${github_org}@*/aws-${product}-infra@*:environment:${environment}",
+            "repo:${github_org}@*/aws-${product}-infra-*:environment:${environment}"
           ]
         },
         "StringEquals": {
