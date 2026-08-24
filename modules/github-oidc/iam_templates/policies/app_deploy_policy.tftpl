@@ -74,7 +74,7 @@
 			],
 			"Condition": {
 				"StringEquals": {
-					"iam:PermissionsBoundary": "arn:aws:iam::718735301943:policy/biji-SharedPolicyBoundary"
+					"iam:PermissionsBoundary": "${boundary_arn}"
 				}
 			},
 			"Effect": "Allow",
@@ -84,7 +84,7 @@
 		{
 			"Action": "iam:PassRole",
 			"Effect": "Allow",
-			"Resource": "arn:aws:iam::718735301943:role/*",
+			"Resource": "arn:aws:iam::${account_id}:role/*",
 			"Sid": "AllowPassRole"
 		},
 		{

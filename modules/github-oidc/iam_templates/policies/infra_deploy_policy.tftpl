@@ -236,7 +236,7 @@
 			"Resource": "*",
 			"Condition": {
 				"StringEquals": {
-					"iam:PermissionsBoundary": "arn:aws:iam::718735301943:policy/biji-SharedPolicyBoundary"
+					"iam:PermissionsBoundary": "${boundary_arn}"
 				}
 			}
 		},
@@ -244,7 +244,7 @@
 			"Sid": "AllowPassRole",
 			"Effect": "Allow",
 			"Action": "iam:PassRole",
-			"Resource": "arn:aws:iam::718735301943:role/*"
+			"Resource": "arn:aws:iam::${account_id}:role/*"
 		},
 		{
 			"Sid": "AllowCreateServiceLinkedRole",
@@ -329,7 +329,7 @@
 				"cloudtrail:AddTags",
 				"cloudtrail:RemoveTags"
 			],
-			"Resource": "arn:aws:cloudtrail:*:718735301943:trail/*"
+			"Resource": "arn:aws:cloudtrail:*:${account_id}:trail/*"
 		},
 		{
 			"Sid": "AllowCloudTrailList",
@@ -372,7 +372,7 @@
 				"iam:TagOpenIDConnectProvider",
 				"iam:UntagOpenIDConnectProvider"
 			],
-			"Resource": "arn:aws:iam::718735301943:oidc-provider/*"
+			"Resource": "arn:aws:iam::${account_id}:oidc-provider/*"
 		},
 		{
 			"Sid": "AllowAPIGateway",
