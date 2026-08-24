@@ -23,6 +23,38 @@
 		},
 		{
 			"Action": [
+				"sns:CreateTopic",
+				"sns:DeleteTopic",
+				"sns:GetTopicAttributes",
+				"sns:SetTopicAttributes",
+				"sns:ListTagsForResource",
+				"sns:TagResource",
+				"sns:UntagResource",
+				"sns:Subscribe",
+				"sns:Unsubscribe",
+				"sns:GetSubscriptionAttributes",
+				"sns:SetSubscriptionAttributes",
+				"sns:ListSubscriptionsByTopic"
+			],
+			"Effect": "Allow",
+			"Resource": "*",
+			"Sid": "AllowSNSTopicManagement"
+		},
+		{
+			"Action": [
+				"cloudwatch:PutMetricAlarm",
+				"cloudwatch:DeleteAlarms",
+				"cloudwatch:DescribeAlarms",
+				"cloudwatch:ListTagsForResource",
+				"cloudwatch:TagResource",
+				"cloudwatch:UntagResource"
+			],
+			"Effect": "Allow",
+			"Resource": "*",
+			"Sid": "AllowCloudWatchAlarms"
+		},
+		{
+			"Action": [
 				"kms:Decrypt",
 				"kms:GenerateDataKey",
 				"kms:GenerateDataKeyWithoutPlaintext",
